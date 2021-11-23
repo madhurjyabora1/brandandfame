@@ -1,4 +1,4 @@
 module.exports = {
-  publicPath: '/brandandfame/',
+  publicPath: '/',
   transpileDependencies: ['vuetify'],
 };

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Landing from '../components/Landing.vue'
-
+import Form from '../components/Form.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -9,6 +9,11 @@ const routes = [
     path: '/',
     name: 'Landing',
     component: Landing
+  },
+  {
+    path: '/form',
+    name: 'Form',
+    component: Form
   },
   {
     path: '/about',

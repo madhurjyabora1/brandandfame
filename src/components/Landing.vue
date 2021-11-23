@@ -15,11 +15,11 @@
       </v-row>
     </v-parallax>
     <v-parallax
-      height="600"
+      :height="imageHeight"
       src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
     >
       <v-row align="center" justify="center">
-        <v-col cols="4">
+        <v-col cols="12" sm="12" md="4">
           <v-card class="mx-auto my-12" max-width="374">
             <h2 class="text-center py-2">Basic</h2>
             <v-divider class="mx-4"></v-divider>
@@ -35,11 +35,13 @@
             </v-list>
 
             <v-card-actions>
-              <v-btn color="primary" block> Book </v-btn>
+              <v-btn color="primary" block @click.stop="bookDialog('Basic')">
+                Book
+              </v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
-        <v-col cols="4">
+        <v-col cols="12" sm="12" md="4">
           <v-card class="mx-auto my-12" max-width="374">
             <h2 class="text-center py-2">Basic</h2>
             <v-divider class="mx-4"></v-divider>
@@ -55,11 +57,13 @@
             </v-list>
 
             <v-card-actions>
-              <v-btn color="primary" block> Book </v-btn>
+              <v-btn color="primary" block @click.stop="bookDialog('Standard')">
+                Book
+              </v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
-        <v-col cols="4">
+        <v-col cols="12" sm="12" md="4">
           <v-card class="mx-auto my-12" max-width="374">
             <h2 class="text-center py-2">Basic</h2>
             <v-divider class="mx-4"></v-divider>
@@ -75,25 +79,68 @@
             </v-list>
 
             <v-card-actions>
-              <v-btn color="primary" block> Book </v-btn>
+              <v-btn color="primary" block @click.stop="bookDialog('Premium')">
+                Book
+              </v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
       </v-row>
     </v-parallax>
+    <form-modal :dialog="openDialog" @close="close" :mPackage="sendPackage" />
   </v-container>
 </template>
 <script>
+import FormModal from "@/components/FormModal.vue";
 export default {
+  components: {
+    FormModal,
+  },
   //name: "Landing"
-  data: () => ({
-    links: ['Dashboard', 'Messages', 'Profile', 'Updates'],
-    menuItems: [
-      { text: 'Facility', icon: 'mdi-check' },
-      { text: 'Facility', icon: 'mdi-check' },
-      { text: 'Facility', icon: 'mdi-check' },
-    ],
-  }),
+  data() {
+    return {
+      links: ["Dashboard", "Messages", "Profile", "Updates"],
+      menuItems: [
+        { text: "Branding", icon: "mdi-check" },
+        { text: "Digital Marketing Content Creation", icon: "mdi-check" },
+        { text: "Web Designing", icon: "mdi-check" },
+        { text: "Marketing Strategy and Analysis", icon: "mdi-check" },
+        { text: "POS", icon: "mdi-check" },
+      ],
+      openDialog: false,
+      mPackage: "",
+    };
+  },
+  computed: {
+    sendPackage() {
+      return this.mPackage;
+    },
+    imageHeight() {
+      switch (this.$vuetify.breakpoint.name) {
+        case "xs":
+          return "200px";
+        case "sm":
+          return "400px";
+        case "md":
+          return "600px";
+        case "lg":
+          return "800px";
+        case "xl":
+          return "1000px";
+      }
+      return "1000px";
+    },
+  },
+  methods: {
+    bookDialog(val) {
+      this.mPackage = val;
+      this.openDialog = true;
+    },
+    close() {
+      this.mPackage = "";
+      this.openDialog = false;
+    },
+  },
 };
 </script>
 <style scoped>
