@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="dialog" max-width="600px" @click:outside="close">
+    <v-dialog v-model="show" max-width="600px" @click:outside="close">
       <v-card>
         <v-card-title>
           <span class="text-h5">Book Now</span>
@@ -70,20 +70,10 @@
 <script>
 export default {
   props: {
-    dialog: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
+    value: Boolean,
     mPackage: {
       type: String,
       required: true,
-    },
-  },
-  computed: {
-    showPack() {
-      console.log(this.mPackage);
-      return this.showPack;
     },
   },
   data() {
@@ -94,13 +84,35 @@ export default {
       firstname: null,
       lastname: null,
       phNumber: null,
-      marketingPackage: this.mPackage,
+      marketingPackage: "",
       items: ["Basic", "Standard", "Premium"],
     };
   },
+  watch: {
+    mPackage(val) {
+      // Be sure to validate default values
+      if (val !== "") {
+        this.marketingPackage = val;
+      }
+    },
+  },
+  computed: {
+    // Configuring a computed property like this,
+    // you can close the dialog from the child component
+    // and avoid the mutation prop warning
+    show: {
+      get() {
+        return this.value;
+      },
+      set(value) {
+        var me = this;
+        me.$emit("input", value);
+      },
+    },
+  },
   methods: {
     close() {
-      this.$emit("close");
+      this.show = false;
     },
     async save() {
       this.snackMsg = "";
@@ -110,6 +122,8 @@ export default {
         lastname: this.lastname,
         phoneNumber: this.phNumber,
         package: this.marketingPackage,
+        status: "Not Started",
+        date: new Date(),
       };
       try {
         const resp = await this.$axios.post(

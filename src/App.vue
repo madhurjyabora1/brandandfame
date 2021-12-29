@@ -1,7 +1,17 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer v-model="sidebar" app>
-      <v-subheader>Brand N Fame</v-subheader>
+    <v-navigation-drawer v-model="sidebar" app class="nav-draw">
+      <router-link to="/">
+        <!-- <v-img
+          alt="Vuetify Logo"
+          class="shrink logo-top"
+          contain
+          :src="logo"
+          transition="scale-transition"
+          width="180"
+        /> -->
+        <div class="logo-font logo-top">BRAND N FAME</div>
+      </router-link>
       <v-divider></v-divider>
       <v-list>
         <v-list-item
@@ -16,14 +26,15 @@
     <v-app-bar app color="white" elevate-on-scroll fixed>
       <v-container class="py-0 fill-height" fluid>
         <router-link to="/">
-          <v-img
+          <!-- <v-img
             alt="Vuetify Logo"
             class="shrink"
             contain
             :src="logo"
             transition="scale-transition"
             width="230"
-          />
+          /> -->
+          <div class="logo-font">BRAND N FAME</div>
         </router-link>
 
         <v-spacer></v-spacer>
@@ -69,3 +80,15 @@ export default {
   }),
 };
 </script>
+<style scoped>
+.logo-top {
+  margin-top: 10px !important;
+  margin-bottom: 3px;
+  margin-left: 12px;
+}
+.logo-font {
+  font-family: "Oxygen", sans-serif;
+  color: black;
+  font-size: 20px;
+}
+</style>

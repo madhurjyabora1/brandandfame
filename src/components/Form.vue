@@ -78,6 +78,8 @@ export default {
         lastname: this.lastname,
         phoneNumber: this.phNumber,
         package: this.marketingPackage,
+        status: "Not Started",
+        date: new Date(),
       };
       try {
         const resp = await this.$axios.post(
