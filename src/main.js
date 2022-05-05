@@ -7,6 +7,8 @@ import axios from 'axios'
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import VueSmoothScroll from 'vue2-smooth-scroll'
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -27,6 +29,7 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 console.log(analytics)
+Vue.use(VueSmoothScroll)
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 

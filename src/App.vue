@@ -10,7 +10,9 @@
           transition="scale-transition"
           width="180"
         /> -->
-        <div class="logo-font logo-top">BRAND N FAME</div>
+        <div class="logo-font-nav logo-top">
+          Brand <span class="logo-mid-nav">n</span> Fame
+        </div>
       </router-link>
       <v-divider></v-divider>
       <v-list>
@@ -23,7 +25,14 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar app color="white" elevate-on-scroll fixed>
+    <v-app-bar
+      app
+      :color="dynamicColor"
+      lighten
+      elevate-on-scroll
+      fixed
+      :class="{ 'new-color': scrollPosition > 50 }"
+    >
       <v-container class="py-0 fill-height" fluid>
         <router-link to="/">
           <!-- <v-img
@@ -34,13 +43,16 @@
             transition="scale-transition"
             width="230"
           /> -->
-          <div class="logo-font">BRAND N FAME</div>
+          <div class="logo-font" :class="{ 'new-color': scrollPosition > 50 }">
+            Brand <span class="logo-mid">n</span> Fame
+          </div>
         </router-link>
 
         <v-spacer></v-spacer>
 
         <span class="d-sm-none">
           <v-app-bar-nav-icon
+            :class="{ 'new-color': scrollPosition > 50 }"
             @click.stop="sidebar = !sidebar"
           ></v-app-bar-nav-icon>
         </span>
@@ -48,6 +60,7 @@
           text
           plain
           class="d-none d-sm-flex"
+          :class="{ 'new-color': scrollPosition > 50 }"
           v-for="item in menuItems"
           :key="item.title"
           :to="item.path"
@@ -72,12 +85,28 @@ export default {
     //
     sidebar: false,
     logo,
+    scrollPosition: null,
+    dynamicColor: "white",
     menuItems: [
       { title: "Home", path: "/" },
       { title: "About", path: "/about" },
       { title: "Form", path: "/form" },
     ],
   }),
+  methods: {
+    updateScroll() {
+      this.scrollPosition = window.scrollY;
+      if (this.scrollPosition > 50) {
+        this.dynamicColor = "primary";
+      }
+      if (this.scrollPosition < 50) {
+        this.dynamicColor = "white";
+      }
+    },
+  },
+  mounted() {
+    window.addEventListener("scroll", this.updateScroll);
+  },
 };
 </script>
 <style scoped>
@@ -87,8 +116,33 @@ export default {
   margin-left: 12px;
 }
 .logo-font {
-  font-family: "Oxygen", sans-serif;
+  font-family: "Kaushan Script", cursive;
   color: black;
-  font-size: 20px;
+  font-size: 35px;
+  text-decoration: none;
+}
+.logo-mid {
+  font-family: "Kaushan Script", cursive;
+  color: red;
+  font-size: 35px;
+  text-decoration: none;
+}
+.logo-mid-nav {
+  font-family: "Kaushan Script", cursive;
+  color: red;
+  font-size: 28px;
+  text-decoration: none;
+}
+.logo-font-nav {
+  font-family: "Kaushan Script", cursive;
+  color: black;
+  font-size: 28px;
+  text-decoration: none;
+}
+a {
+  text-decoration: none;
+}
+.new-color {
+  color: white !important;
 }
 </style>

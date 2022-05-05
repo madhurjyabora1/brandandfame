@@ -11,6 +11,11 @@ const routes = [
     component: Landing
   },
   {
+    // /search/screens -> /search?q=screens
+    path: '/services',
+    redirect: '/'
+  },
+  {
     path: '/form',
     name: 'Form',
     component: Form

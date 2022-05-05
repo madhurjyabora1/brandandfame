@@ -15,6 +15,7 @@
     "firebase": "^9.5.0",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
+    "vue2-smooth-scroll": "^1.6.0",
     "vuetify": "^2.4.0"
   },
   "devDependencies": {
